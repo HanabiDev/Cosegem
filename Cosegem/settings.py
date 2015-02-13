@@ -35,7 +35,7 @@ if socket.gethostname().startswith('localhost'):
 else:
     DEVEL = False
 
-DEBUG = DEVEL
+DEBUG = True
 
 TEMPLATE_DEBUG = DEVEL
 
@@ -46,10 +46,6 @@ if DEVEL:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'ursus/static'),
-    )
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -65,12 +61,9 @@ else:
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-
-
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'user_sessions',
@@ -80,7 +73,7 @@ INSTALLED_APPS = (
     'django_otp.plugins.otp_static',
     'django_otp.plugins.otp_totp',
     'two_factor',
-    #'ursus_auth',
+    'ursus_auth',
     #'ursus',
 )
 
@@ -121,8 +114,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Override Login URL
-LOGIN_URL = reverse_lazy('two_factor:login')
+# Override Login and Logout URLs
+LOGIN_URL = reverse_lazy('login')
+LOGIN_REDIRECT_URL = reverse_lazy('home')
+LOGOUT_URL = reverse_lazy('logout')
+
 
 #GeoIP database binaries
 GEOIP_PATH = os.path.join(BASE_DIR, 'GeoIP_DB')

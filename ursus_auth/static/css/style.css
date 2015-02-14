@@ -1085,7 +1085,7 @@ PANELS CONFIGURATIONS
 .white-panel {
 	text-align: center;
 	background: #ffffff;
-	color: #ccd1d9;
+	color: #9D9D9D;
 }
 
 .white-panel p {
@@ -1097,11 +1097,11 @@ PANELS CONFIGURATIONS
 	background: #f4f4f4;
 	padding: 3px;
 	margin-bottom: 15px;
-	color: #c6c6c6;
+	color: #A1A1A1;
 }
 .white-panel .small {
 	font-size: 10px;
-	color: #ccd1d9;
+	color: #A9A9A9;
 }
 
 .white-panel i {
@@ -2266,7 +2266,8 @@ label {
 
 .login-wrap input[type=text],
 .login-wrap input[type=password],
-.login-wrap #id_token-otp_token{
+.login-wrap #id_token-otp_token,
+#id_generator-token{
     margin-bottom: 20px;
     text-align: center;
     display: block;
@@ -2285,6 +2286,16 @@ label {
     -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+label[for="id_generator-token"]{
+    text-transform: uppercase;
+}
+
+#id_generator-token{
+    width: 150px;
+    margin-left: 30px;
+    margin-top: 14px;
 }
 
 .errorlist{

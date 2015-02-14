@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import redirect, render_to_response
+from django.shortcuts import redirect, render_to_response, HttpResponse
 from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView, FormView
 
@@ -16,6 +16,9 @@ from two_factor.views import (LoginView, DisableView,SetupCompleteView, SetupVie
                               ProfileView, QRGeneratorView)
 
 from django.core.urlresolvers import reverse_lazy
+
+def dummy(request):
+    return HttpResponse('Home')
 
 @login_required
 def home(request):
@@ -37,11 +40,11 @@ def home(request):
 
 class OwnDisableView(DisableView):
     template_name = 'disable_otp.html'
-    redirect_url = reverse_lazy('home')
+    redirect_url = reverse_lazy('ursus_auth:account')
 
 class OwnSetupView(SetupView):
     template_name = 'setup.html'
-    redirect_url = reverse_lazy('home')
+    redirect_url = reverse_lazy('ursus_auth:account')
 
 class OwnLoginView(LoginView):
     template_name = 'login.html'

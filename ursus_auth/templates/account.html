@@ -133,7 +133,7 @@
 								{% else %}
 									La autenticación de doble factor esta desactivada en tu cuenta. Activala para una seguridad de cuenta mejorada.
 									<p>
-										<a href="{% url 'enable_otp' %}" class="btn btn-success">
+										<a href="{% url 'ursus_auth:enable_otp' %}" class="btn btn-success">
 	      									{% trans "Enable Two-Factor Authentication" %}
 	      								</a>	
 									</p>
@@ -145,7 +145,7 @@
 								<p class="small mt">CAMBIAR CONFIGURACIÓN</p>
 								<p>
 									<p>
-										<a class="btn btn-danger" href="{% url 'disable_otp' %}">
+										<a class="btn btn-danger" href="{% url 'ursus_auth:disable_otp' %}">
       										{% trans "Disable Two-Factor Authentication" %}
       									</a>
       								</p>

@@ -9,12 +9,11 @@ from views import (OwnDisableView, OwnSetupView, OwnLoginView)
 
 urlpatterns = patterns(
     '',
-    url(r'^$', 'ursus_auth.views.home', name='home'),
+    url(r'^$', 'ursus_auth.views.home', name='account'),
     url(r'^logout/$', 'django.contrib.auth.views.logout', name='logout'),
     url(r'^desactivar-otp/$', OwnDisableView.as_view(), name='disable_otp'),
     url(r'^activar-otp/$', OwnSetupView.as_view(), name='enable_otp'),
-    
-    
-    url(r'', include(tf_urls, 'two_factor')),
+     
+    url(r'', include(tf_urls)),
     url(r'', include('user_sessions.urls', 'user_sessions')),
 )

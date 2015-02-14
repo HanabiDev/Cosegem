@@ -116,8 +116,8 @@ STATIC_URL = '/static/'
 
 # Override Login and Logout URLs
 LOGIN_URL = reverse_lazy('login')
-LOGIN_REDIRECT_URL = reverse_lazy('home')
-LOGOUT_URL = reverse_lazy('logout')
+LOGIN_REDIRECT_URL = reverse_lazy('ursus_auth:account')
+LOGOUT_URL = reverse_lazy('ursus_auth:logout')
 
 
 #GeoIP database binaries

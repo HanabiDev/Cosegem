@@ -53,9 +53,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'periodic_nuevo',
-            'USER': 'periodic_nuevoad',
-            'PASSWORD': 'cotpbmcg',
+            'NAME': 'ursus',
+            'USER': 'root',
+            'PASSWORD': '',
         }
     }
 

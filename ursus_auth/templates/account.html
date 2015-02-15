@@ -1,7 +1,22 @@
 {% extends "base.html" %}
 {% load future i18n two_factor %}
+
+{% block title %}
+	{% if user == site_user %} 
+		Cuenta 
+	{% else %} 
+		Ver usuario: {{site_user.first_name}} {{site_user.last_name}}
+	{% endif %}
+{% endblock %}
+
 {% block content %}
-<h3 style="padding-left:20px;"><i class="fa fa-user"></i> Mi Cuenta</h3>
+<h3 style="padding-left:20px;"><i class="fa fa-user"></i> 
+	{% if user == site_user %} 
+		Mi Cuenta 
+	{% else %} 
+		Ver usuario: {{site_user.first_name}} {{site_user.last_name}}
+	{% endif %}
+</h3>
 <hr style="border-color:#ddd;">
 
 <div class="row mt">
@@ -13,12 +28,14 @@
 					<div class="white-header">
 						<h5>RESUMEN</h5>
 					</div>
-					<p><img src="assets/img/ui-zac.jpg" class="img-circle" width="50"></p>
-					<p><b>{{user.username}}</b></p>
+					<p>
+						<img src="{{MEDIA_URL}}{{ site_user.avatar }}" class="img-circle" width="50">
+					</p>
+					<p><b>{{site_user.first_name}} {{site_user.last_name}}</b></p>
 					<div class="row">
 						<div class="col-md-6">
 							<p class="small mt">USUARIO DESDE</p>
-							<p>{{user.date_joined|date:"M d, Y"}}</p>
+							<p>{{site_user.date_joined|date:"M d, Y"}}</p>
 						</div>
 						<div class="col-md-6">
 							<p class="small mt">TIPO</p>
@@ -26,11 +43,11 @@
 						</div>
 						<div class="col-md-6">
 							<p class="small mt">ULTIMO INGRESO</p>
-							<p>{{user.last_login|date:"M d, Y"}}</p>
+							<p>{{site_user.last_login|date:"M d, Y"}}</p>
 						</div>
 						<div class="col-md-6">
 							<p class="small mt">ESTADO</p>
-							<p>{% if user.is_active%} Activo {% else %} Inactivo {% endif %}</p>
+							<p>{% if site_user.is_active%} Activo {% else %} Inactivo {% endif %}</p>
 						</div>
 						<div class="col-md-12">
 							<p class="small mt">ESTUDIOS ASIGNADOS</p>
@@ -50,57 +67,70 @@
 					<div class="row">
 						<div class="col-md-5">
 							<p class="small mt">DOCUMENTO</p>
-							<p>Cédula de Ciudadanía</p>
+							<p>{{site_user.get_dni_type_display}}</p>
 						</div>
 						<div class="col-md-3">
 							<p class="small mt">NÚMERO</p>
-							<p>1049629402</p>
+							<p>{{site_user.dni_number}}</p>
 						</div>
 						<div class="col-md-3">
 							<p class="small mt">GÉNERO</p>
-							<p>Masculino</p>
+							<p>{{site_user.get_genre_display}}</p>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-md-5">
 							<p class="small mt">DIRECCIÓN</p>
-							<p>Calle 128 Bis # 87D 33, Bogotá, Cundinamarca, Colombia</p>
+							<p>{{site_user.address}}</p>
 						</div>
 						<div class="col-md-3">
 							<p class="small mt">TELÉFONO</p>
-							<p>038-755-3467</p>
+							<p>{{site_user.phone}}</p>
 						</div>
 						<div class="col-md-3">
 							<p class="small mt">MÓVIL</p>
-							<p>313-458-2495</p>
+							<p>{{site_user.mobile}}</p>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-5">
 							<p class="small mt">EMAIL</p>
-							<p>gomexa@hotmail.com</p>
+							<p>{{site_user.email}}</p>
 						</div>
 						<div class="col-md-3">
 							<p class="small mt">EMPRESA</p>
-							<p>HANABI S.A.S.</p>
+							<p>{{site_user.company}}</p>
 						</div>
 						<div class="col-md-3">
 							<p class="small mt">CARGO</p>
-							<p>Developer	</p>
+							<p>{{site_user.role}}</p>
 						</div>
 					</div>
 					<div class="row">
-						<p style="margin-top:25px;">
-							<a href="#" class="btn btn-primary">Actualizar mi información</a>	
-						</p>
+						{% if site_user = user %}
+							<p style="margin-top:25px;">
+								<a href="{% url "ursus_auth:update_account" site_user.id %}" class="btn btn-primary">
+									Actualizar mi información
+								</a>
+							</p>
+						{% else %}
+							<p style="margin-top:25px;">
+								<a href="{% url "users:home" %}" class="btn btn-default">
+									Regresar
+								</a>
+								<a href="{% url "users:edit" site_user.id %}" class="btn btn-primary">
+									Modificar Información
+								</a>
+							</p>
+						{% endif %}	
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
+{% if user == site_user %}
 <div class="row mt">
 	<div class="col-lg-12">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -159,5 +189,5 @@
 		</div> 
 	</div>
 </div>
-
+{% endif %}
 {% endblock %}

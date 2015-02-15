@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Agregar Usuario{% endblock %}
+{% block content %}
+	<h3 style="padding-left:20px;"><i class="fa fa-user"></i> Crear usuario</h3>
+	<hr style="border-color:#ddd;">
+
+	<div class="col-lg-6">
+		<form id="add_user" method="POST" action="{% url "users:new" %}">
+			{% csrf_token %}
+			{{form}}
+			<p class="text-right">
+				<a href="{% url "users:home" %}" class="btn btn-default" >Cancelar</a>
+				<button type="submit" class="btn btn-primary" >Crear Usuario</button>
+			</p>
+		</form>
+	</div>
+{% endblock %}	

@@ -2292,6 +2292,25 @@ label[for="id_generator-token"]{
     text-transform: uppercase;
 }
 
+label[for="id_avatar"]{
+    margin-right: 10px;
+}
+
+label[for="avatar-clear_id"]{
+    display: none;
+}
+
+#id_avatar,
+#avatar-clear_id,
+#id_password,
+label[for="id_password"]{
+    display: none;
+}
+
+#id_genre, #id_dni_type{
+    display: block;
+}
+
 #id_generator-token{
     width: 150px;
     margin-left: 30px;
@@ -2306,4 +2325,45 @@ label[for="id_generator-token"]{
     color: #D44950 !important;
     text-align: center;
 }
+
+.errorlist li{
+    color: #D44950 !important;
+}
+
+.form-control-label{
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+td{
+    height: 40px;
+    vertical-align:middle !important;
+}
+
+td img{
+    max-height: 30px;
+    border-radius: 50%;
+}
+
+.actions-bar{
+    background:#eee; 
+    padding:10px;
+    border-radius:5px 5px 0 0px;
+}
+
+#unseen{
+    box-shadow: 0 0px 20px -10px #333;
+}
+
+#add_user input[type="checkbox"]{
+    margin-left: 10px;
+}
+
+#user-avatar{
+    max-height: 150px;
+    max-width: 150px;
+    min-width: 150px;
+    min-height: 150px;
+}
+
 

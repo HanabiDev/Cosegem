@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Usuarios {% endblock %}
+{% block content %}
+	<div class="row mt">
+		<div class="col-lg-12">
+      <h3 class="inline" style="padding-left:20px;">
+        <i class="fa fa-group"></i> Usuarios  <small>({{users.count}} usuarios)</small>
+      </h3>
+      <hr style="border-color:#ddd;">
+      <div class="row-fluid actions-bar">
+        <a href="{% url "users:new"%}" class="btn btn-success">Agregar Usuario</a>
+        
+        <select id="search-box" class="form-control chosen-select">
+          <option></option>
+          {% for site_user in users %}
+            <option data-href="{% url "users:profile" site_user.id %}">
+              <img src="{{MEDIA_URL}}HOLAAA">
+              {{site_user.first_name}} {{site_user.last_name}}
+            </option>
+          {% endfor %}
+        </select>
+
+      </div>
+      <section id="unseen">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="text-center">Nombre</th>
+              <th class="text-center hidden-xs">Usuario</th>
+              <th class="text-center hidden-xs">Email</th>
+              <th class="text-center hidden-xs">Estado</th>
+              <th class="text-center hidden-xs">Teléfono</th>
+              <th class="text-center hidden-xs">Móvil</th>
+              <th class="text-center hidden-xs">Cargo</th>
+              <th class="text-center hidden-xs">Empresa</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if users %}
+              {% for site_user in users %}
+                <tr>
+                  <td class="text-center">
+                    <img src="{{MEDIA_URL}}{{ site_user.avatar }}">
+                  </td>
+                  <td class="text-center">
+                    <a href="{% url "users:profile" site_user.id %}">
+                      {{site_user.first_name}} {{site_user.last_name}}  
+                    </a>
+                  </td>
+                  <td class="text-center hidden-xs">{{site_user.username}}</td>
+                  <td class="text-center hidden-xs">{{site_user.email}}</td>
+                  <td class="text-center hidden-xs">
+                    {% if site_user.is_active %}
+                      <a href="{% url "users:block" site_user.id %}">
+                        <span class="text-success fa fa-check-circle"></span> Activo  
+                      </a>
+                      
+                    {% else %}
+                      <a href="{% url "users:unblock" site_user.id %}">
+                        <span class="text-danger fa fa-times-circle"></span> Inactivo
+                      </a>
+                    {% endif %}
+                  </td>
+                  <td class="text-center hidden-xs">
+                    {% if site_user.phone %}
+                      {{site_user.phone}}
+                    {% else %}
+                      --
+                    {% endif %}
+                  </td>
+                  <td class="text-center hidden-xs">
+                    {% if site_user.mobile %}
+                      {{site_user.mobile}}
+                    {% else %}
+                      --
+                    {% endif %}
+                  </td>
+                  <td class="text-center hidden-xs">
+                    {% if site_user.role %}
+                      {{site_user.role}}
+                    {% else %}
+                      --
+                    {% endif %}
+                  </td>
+                  <td class="text-center hidden-xs">
+                    {% if site_user.company %}
+                      {{site_user.company}}
+                    {% else %}
+                      --
+                    {% endif %}
+                  </td>
+                </tr>            
+              {% endfor %}
+            {% else %}
+              jajajajajaj
+            {% endif %}   
+          </tbody>
+        </table>
+      </section>
+    </div>
+	</div>
+{% endblock %}
+

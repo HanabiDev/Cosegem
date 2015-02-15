@@ -6,29 +6,24 @@
 
       <p class="centered">
         <a href="{% url "ursus_auth:account" %}">
-          <img src="static/img/ui-sam.jpg" class="img-circle" width="60">
+          <img src="{{MEDIA_ROOT}}{{user.avatar.url}}" class="img-circle" width="60">
         </a>
       </p>
 
-      <h5 class="centered">{{user.username}}</h5>
+      <h5 class="centered">{{user.first_name}}</h5>
 
       <li class="mt">
-        <a href="index.html">
-          <i class="fa fa-dashboard"></i>
-          <span>Dashboard</span>
+        <a href="#">
+          <i class="fa fa-home"></i>
+          <span>Inicio</span>
         </a>
       </li>
 
       <li class="sub-menu">
-        <a href="javascript:;" >
-          <i class="fa fa-desktop"></i>
-          <span>UI Elements</span>
+        <a href="{% url "users:home" %}" >
+          <i class="fa fa-group"></i>
+          <span>Usuarios</span>
         </a>
-        <ul class="sub">
-          <li><a  href="general.html">General</a></li>
-          <li><a  href="buttons.html">Buttons</a></li>
-          <li><a  href="panels.html">Panels</a></li>
-        </ul>
       </li>
 
       <li class="sub-menu">

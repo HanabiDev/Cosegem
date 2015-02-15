@@ -33,6 +33,7 @@ def home(request):
         'default_device_type': default_device(request.user).__class__.__name__,
         'backup_phones': backup_phones(request.user),
         'backup_tokens': backup_tokens,
+        'site_user': request.user
     }
 
     return render_to_response('account.html', status, context_instance=RequestContext(request))

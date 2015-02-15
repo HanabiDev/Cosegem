@@ -64,6 +64,7 @@ else:
 # Application definition
 
 INSTALLED_APPS = (
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'user_sessions',
@@ -74,7 +75,7 @@ INSTALLED_APPS = (
     'django_otp.plugins.otp_totp',
     'two_factor',
     'ursus_auth',
-    #'ursus',
+    'users',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -113,6 +114,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Override Login and Logout URLs
 LOGIN_URL = reverse_lazy('login')
@@ -122,7 +125,3 @@ LOGOUT_URL = reverse_lazy('ursus_auth:logout')
 
 #GeoIP database binaries
 GEOIP_PATH = os.path.join(BASE_DIR, 'GeoIP_DB')
-
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'ursus/templates/'),
-)

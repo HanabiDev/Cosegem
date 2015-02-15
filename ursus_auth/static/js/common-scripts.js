@@ -115,5 +115,49 @@ var Script = function () {
         })
     }
 
+    $("#add_user input").addClass('form-control');
+    $("#add_user label").addClass('form-control-label');
+    $("#add_user .helptext").remove();
+
+
+    $("#search-box").chosen({
+        placeholder_text_single:'Escribe para buscar...',
+        width: "50%",
+        search_contains: true
+    });
+    $("#search-box").change(function(){
+        document.location.href=$( "#search-box option:selected" ).attr('data-href'); 
+    });
+
+    $("#id_genre, #id_dni_type").addClass('form-control').chosen({
+        width: "100%",
+        disable_search: true
+    });
+
+    $("#add_user input[type='checkbox']").removeClass('form-control');
+
+    $("#add_user input[type='file']").attr('onchange','update_image(this)');
+
+    $("#change-photo-btn").click(function(){
+        $("#add_user input[type='file']").click();
+    });
 
 }();
+
+    var update_image = function(obj){
+        
+        // if IE < 10 doesn't support FileReader
+        if(!window.FileReader){
+            // don't know how to proceed to assign src to image tag
+        } else {
+            var reader = new FileReader();
+            var target = null;
+             
+            reader.onload = function(e) {
+                target =  e.target || e.srcElement;
+                $("#user-avatar").prop("src", target.result);
+            };
+            
+            reader.readAsDataURL(obj.files[0]);
+        }
+    }
